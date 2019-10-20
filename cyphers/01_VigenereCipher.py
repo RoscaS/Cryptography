@@ -1,3 +1,7 @@
+"""
+Exercise 1: Vigenère cyper
+"""
+
 letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 Ki = lambda c, k: letters.index(k[c % len(k)])
 
@@ -9,11 +13,13 @@ def viginere_cipher_encrypt(D, key):
     E = [Ei(Pi(i), Ki(c, key)) for c, i in enumerate(D)]
     return "".join(E)
 
+
 def viginere_cipher_decode(E, key):
     """Decrypt: Di = (Ei - Ki + 26) % 26"""
     Di = lambda c, i: (letters.index(i) - Ki(c, key) + 26) % 26
     D = [letters[Di(c, i)] for c, i in enumerate(E)]
     return "".join(D)
+
 
 def viginiere_test():
     key = "LEMON"
@@ -21,6 +27,7 @@ def viginiere_test():
     encrypted = "LXFOPVEFRNHR"
     assert viginere_cipher_encrypt(plein, key) == encrypted
     assert viginere_cipher_decode(encrypted, key) == plein
+
 
 if __name__ == '__main__':
     viginiere_test()
